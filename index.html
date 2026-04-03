@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anoop Gopalakrishnan — VP of Engineering, Cloud Platform</title>
+<meta name="description" content="Technology executive with 20+ years building cloud platforms, AI-powered developer tooling, and leading engineering organizations. CNCF contributor, KubeCon speaker, and open-source leader.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0c10;
+  --bg-elevated:#12151c;
+  --bg-card:#161922;
+  --surface:#1c2030;
+  --border:#252a3a;
+  --text:#e4e7ef;
+  --text-secondary:#8b92a8;
+  --text-muted:#565e78;
+  --accent:#2dd4a8;
+  --accent-dim:#1a9e7a;
+  --accent-glow:rgba(45,212,168,0.12);
+  --accent-warm:#34d4b0;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Outfit',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--bg)}
+
+/* Noise overlay */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat:repeat;opacity:.4
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+
+a{color:inherit;text-decoration:none}
+
+/* Navigation */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.25rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(10,12,16,0.8);backdrop-filter:blur(20px);
+  border-bottom:1px solid transparent;
+  transition:border-color 0.4s var(--ease)
+}
+nav.scrolled{border-bottom-color:var(--border)}
+.nav-brand{
+  font-family:var(--mono);font-size:0.85rem;font-weight:500;
+  color:var(--accent);letter-spacing:0.05em
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:0.82rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--text-secondary);transition:color 0.3s var(--ease);position:relative
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
+  background:var(--accent);transition:width 0.3s var(--ease)
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1.5px;background:var(--text-secondary);transition:all 0.3s var(--ease)}
+
+/* Sections */
+section{padding:7rem 2.5rem}
+.container{max-width:1100px;margin:0 auto}
+
+/* Hero */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:8rem 2.5rem 6rem;position:relative;overflow:hidden
+}
+.hero-bg{
+  position:absolute;top:-20%;right:-10%;width:700px;height:700px;
+  background:radial-gradient(circle,rgba(45,212,168,0.06) 0%,transparent 70%);
+  pointer-events:none;animation:heroPulse 8s ease-in-out infinite alternate
+}
+@keyframes heroPulse{0%{opacity:0.6;transform:scale(1)}100%{opacity:1;transform:scale(1.15)}}
+.hero-content{position:relative;z-index:1;max-width:1100px;margin:0 auto;width:100%}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-family:var(--mono);font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:2rem;
+  opacity:0;transform:translateY(20px);animation:fadeUp 0.8s var(--ease-out) 0.2s forwards
+}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+.hero-name{
+  font-family:var(--serif);font-size:clamp(3rem,7vw,5.5rem);
+  line-height:1.05;font-weight:400;margin-bottom:1rem;
+  opacity:0;transform:translateY(30px);animation:fadeUp 0.8s var(--ease-out) 0.35s forwards
+}
+.hero-name em{font-style:italic;color:var(--accent)}
+.hero-title{
+  font-size:clamp(1rem,2vw,1.35rem);font-weight:300;color:var(--text-secondary);
+  margin-bottom:1rem;max-width:600px;
+  opacity:0;transform:translateY(30px);animation:fadeUp 0.8s var(--ease-out) 0.5s forwards
+}
+.hero-sub{
+  font-size:0.9rem;color:var(--text-muted);max-width:520px;line-height:1.7;margin-bottom:2.5rem;
+  opacity:0;transform:translateY(30px);animation:fadeUp 0.8s var(--ease-out) 0.6s forwards
+}
+.hero-links{
+  display:flex;flex-wrap:wrap;gap:0.75rem;
+  opacity:0;transform:translateY(20px);animation:fadeUp 0.8s var(--ease-out) 0.75s forwards
+}
+.hero-link{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.6rem 1.2rem;border:1px solid var(--border);border-radius:6px;
+  font-size:0.82rem;font-weight:400;color:var(--text-secondary);
+  transition:all 0.3s var(--ease);letter-spacing:0.02em
+}
+.hero-link:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.hero-link svg{width:16px;height:16px;flex-shrink:0}
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border);
+  opacity:0;transform:translateY(20px);animation:fadeUp 0.8s var(--ease-out) 0.9s forwards
+}
+.stat-num{font-family:var(--serif);font-size:2.2rem;color:var(--text);line-height:1}
+.stat-label{font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.3rem}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* Section Headers */
+.section-label{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.5rem
+}
+.section-label::before{content:'';width:20px;height:1px;background:var(--accent)}
+.section-title{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:1rem
+}
+.section-desc{
+  font-size:1rem;color:var(--text-secondary);max-width:600px;line-height:1.75;margin-bottom:3.5rem;font-weight:300
+}
+
+/* About */
+.about{background:var(--bg-elevated)}
+.about-grid{display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:start}
+.about-avatar{
+  width:220px;height:220px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent-dim),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:4.5rem;color:var(--bg);
+  position:relative;margin:0 auto
+}
+.about-avatar::after{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid var(--accent);opacity:0.2
+}
+.about-text p{color:var(--text-secondary);line-height:1.85;margin-bottom:1.25rem;font-weight:300}
+.about-text p strong{color:var(--text);font-weight:500}
+.about-highlights{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2.5rem
+}
+.highlight-card{
+  padding:1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;
+  transition:all 0.3s var(--ease)
+}
+.highlight-card:hover{border-color:var(--accent-dim);transform:translateY(-2px)}
+.highlight-num{font-family:var(--serif);font-size:1.8rem;color:var(--accent);line-height:1}
+.highlight-text{font-size:0.82rem;color:var(--text-secondary);margin-top:0.4rem;line-height:1.5}
+
+/* Career Timeline */
+.timeline-section{position:relative}
+.timeline{position:relative;padding-left:3rem}
+.timeline::before{
+  content:'';position:absolute;left:7px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(to bottom,var(--accent),var(--border) 30%,var(--border) 70%,transparent)
+}
+.timeline-item{position:relative;padding-bottom:3rem}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{
+  position:absolute;left:-3rem;top:6px;width:15px;height:15px;
+  border-radius:50%;border:2px solid var(--border);background:var(--bg);
+  transition:all 0.3s var(--ease);z-index:1
+}
+.timeline-item:first-child .timeline-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 12px var(--accent-glow)}
+.timeline-item:hover .timeline-dot{border-color:var(--accent)}
+.timeline-period{
+  font-family:var(--mono);font-size:0.72rem;color:var(--text-muted);
+  letter-spacing:0.06em;margin-bottom:0.4rem
+}
+.timeline-role{font-family:var(--serif);font-size:1.35rem;margin-bottom:0.2rem}
+.timeline-company{font-size:0.9rem;color:var(--accent);margin-bottom:0.75rem;font-weight:400}
+.timeline-desc{font-size:0.88rem;color:var(--text-secondary);line-height:1.75;font-weight:300}
+
+/* Open Source */
+.oss-section{background:var(--bg-elevated)}
+.oss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.oss-card{
+  padding:1.75rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  transition:all 0.4s var(--ease);position:relative;overflow:hidden
+}
+.oss-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),transparent);opacity:0;
+  transition:opacity 0.4s var(--ease)
+}
+.oss-card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.oss-card:hover::before{opacity:1}
+.oss-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem}
+.oss-card-name{font-family:var(--mono);font-size:0.95rem;font-weight:500;color:var(--accent)}
+.oss-card-badge{
+  font-size:0.65rem;padding:0.2rem 0.6rem;border-radius:20px;
+  border:1px solid var(--border);color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;
+  white-space:nowrap
+}
+.oss-card-desc{font-size:0.85rem;color:var(--text-secondary);line-height:1.65;margin-bottom:1rem;font-weight:300}
+.oss-card-meta{display:flex;gap:1.25rem;font-size:0.78rem;color:var(--text-muted)}
+.oss-card-meta span{display:inline-flex;align-items:center;gap:0.35rem}
+.oss-card-meta svg{width:14px;height:14px}
+.star-color{color:#e3b341}
+
+/* Tech Stack */
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+.tech-category{padding:1.75rem;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px}
+.tech-cat-name{
+  font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--accent);margin-bottom:1rem
+}
+.tech-tags{display:flex;flex-wrap:wrap;gap:0.5rem}
+.tech-tag{
+  font-size:0.78rem;padding:0.35rem 0.75rem;border-radius:4px;
+  background:var(--surface);color:var(--text-secondary);border:1px solid var(--border);
+  transition:all 0.2s var(--ease)
+}
+.tech-tag:hover{border-color:var(--accent-dim);color:var(--text)}
+
+/* Writing */
+.writing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.writing-card{
+  display:block;padding:1.75rem;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;
+  transition:all 0.4s var(--ease);position:relative
+}
+.writing-card:hover{border-color:var(--accent-dim);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.writing-card-date{
+  font-family:var(--mono);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.06em;margin-bottom:0.6rem
+}
+.writing-card-title{font-size:1.05rem;font-weight:500;line-height:1.45;margin-bottom:0.6rem;color:var(--text)}
+.writing-card-desc{font-size:0.84rem;color:var(--text-secondary);line-height:1.65;font-weight:300;margin-bottom:1rem}
+.writing-card-pub{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-size:0.72rem;color:var(--accent);font-family:var(--mono);letter-spacing:0.04em
+}
+.writing-card-pub svg{width:12px;height:12px}
+.writing-card:hover .writing-card-title{color:var(--accent)}
+
+/* Speaking */
+.speaking-section{background:var(--bg-elevated)}
+.speaking-list{display:grid;gap:1.25rem}
+.speaking-item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;
+  padding:1.5rem 1.75rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  transition:all 0.3s var(--ease)
+}
+.speaking-item:hover{border-color:var(--accent-dim)}
+.speaking-icon{
+  width:44px;height:44px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent-glow);color:var(--accent);flex-shrink:0
+}
+.speaking-icon svg{width:20px;height:20px}
+.speaking-title{font-size:1rem;font-weight:500;margin-bottom:0.15rem}
+.speaking-meta{font-size:0.82rem;color:var(--text-muted);font-weight:300}
+.speaking-tag{
+  font-family:var(--mono);font-size:0.68rem;padding:0.3rem 0.7rem;
+  border:1px solid var(--border);border-radius:4px;color:var(--text-muted);
+  letter-spacing:0.06em;white-space:nowrap
+}
+
+/* Contact */
+.contact-section{text-align:center;padding:8rem 2.5rem}
+.contact-section .section-desc{margin-left:auto;margin-right:auto}
+.contact-links{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:2rem
+}
+.contact-link{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.75rem 1.5rem;border:1px solid var(--border);border-radius:8px;
+  font-size:0.88rem;color:var(--text-secondary);
+  transition:all 0.3s var(--ease)
+}
+.contact-link:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.contact-link svg{width:18px;height:18px}
+
+/* Footer */
+footer{
+  padding:2rem 2.5rem;border-top:1px solid var(--border);
+  text-align:center;font-size:0.75rem;color:var(--text-muted)
+}
+
+/* Scroll animations */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+/* Mobile */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{
+    display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+    background:rgba(10,12,16,0.97);backdrop-filter:blur(20px);
+    flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+    z-index:99
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:1.1rem}
+  .nav-toggle{display:flex;z-index:100}
+  section{padding:5rem 1.5rem}
+  .hero{padding:7rem 1.5rem 4rem}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem;text-align:center}
+  .about-highlights{grid-template-columns:1fr!important}
+  .timeline{padding-left:2.5rem}
+  .timeline-dot{left:-2.5rem}
+  .oss-grid{grid-template-columns:1fr}
+  .tech-grid{grid-template-columns:1fr 1fr}
+  .speaking-item{grid-template-columns:1fr;gap:0.75rem}
+  .speaking-icon{display:none}
+  .speaking-tag{justify-self:start}
+  .contact-section{padding:5rem 1.5rem}
+}
+@media(max-width:480px){
+  .tech-grid{grid-template-columns:1fr}
+  .hero-links{flex-direction:column}
+  .hero-link{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="nav">
+  <a href="#" class="nav-brand">AG</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeNav()">About</a></li>
+    <li><a href="#career" onclick="closeNav()">Career</a></li>
+    <li><a href="#opensource" onclick="closeNav()">Open Source</a></li>
+    <li><a href="#ai" onclick="closeNav()">AI</a></li>
+    <li><a href="#tech" onclick="closeNav()">Tech</a></li>
+    <li><a href="#writing" onclick="closeNav()">Writing</a></li>
+    <li><a href="#speaking" onclick="closeNav()">Speaking</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">VP of Engineering &middot; Cloud Platform</div>
+    <h1 class="hero-name">Anoop<br><em>Gopalakrishnan</em></h1>
+    <p class="hero-title">Building platforms at scale. Scaling engineering organizations. Shaping the cloud-native ecosystem.</p>
+    <p class="hero-sub">Platform Engineering &middot; Cloud Infrastructure &middot; AI &amp; LLM Integration &middot; SRE &middot; Developer Experience</p>
+    <div class="hero-links">
+      <a href="https://github.com/anoop2811" class="hero-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/anoopgopalakrishnan" class="hero-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/guidewire-oss" class="hero-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Guidewire OSS
+      </a>
+      <a href="https://twitter.com/anoop2811" class="hero-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        Twitter
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years in Tech</div>
+      </div>
+      <div>
+        <div class="stat-num">220</div>
+        <div class="stat-label">Engineers Led</div>
+      </div>
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">OSS Repos</div>
+      </div>
+      <div>
+        <div class="stat-num">84</div>
+        <div class="stat-label">Public Repos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-avatar">AG</div>
+      </div>
+      <div>
+        <div class="section-label reveal">About</div>
+        <h2 class="section-title reveal reveal-delay-1">Executive scale.<br>Practitioner depth.</h2>
+        <div class="about-text reveal reveal-delay-2">
+          <p>Technology executive with <strong>20+ years</strong> of progressive leadership across enterprise platforms, cloud-native services, and integration ecosystems. I conceived and scaled <strong>Guidewire's Cloud Platform</strong> into the company's core innovation engine and revenue foundation — pioneering a <strong>Platform-as-a-Product</strong> operating model that consistently kept platform vision ahead of market evolution.</p>
+          <p>I hold unified ownership across <strong>Product Management, Engineering, and SRE</strong> — a rare combination that ensures platform strategy, execution, and reliability move as one. I'm deeply invested in <strong>AI-powered developer tooling</strong> — from building LLM-integrated test intelligence platforms to exploring agent orchestration for SRE automation. Outside of Guidewire, I'm an active <strong>KubeVela maintainer</strong> in the CNCF, a <strong>KubeCon speaker</strong>, and a recognized voice in the platform engineering community.</p>
+        </div>
+        <div class="about-highlights reveal reveal-delay-3">
+          <div class="highlight-card">
+            <div class="highlight-num">1 → 220</div>
+            <div class="highlight-text">Built Cloud Platform org from founding team to 220+ engineers</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-num">445+</div>
+            <div class="highlight-text">GitHub stars on flagship fern-platform project</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-num">30+</div>
+            <div class="highlight-text">Open source repos under Guidewire OSS program</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-num">CNCF</div>
+            <div class="highlight-text">KubeVela maintainer &amp; KubeCon NA 2025 speaker</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Career -->
+<section class="timeline-section" id="career">
+  <div class="container">
+    <div class="section-label reveal">Career</div>
+    <h2 class="section-title reveal reveal-delay-1">Two decades of building<br>at increasing scale</h2>
+    <p class="section-desc reveal reveal-delay-2">From hands-on engineering to executive leadership — always at the intersection of platform thinking and engineering craft.</p>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Nov 2020 — Present</div>
+        <div class="timeline-role">VP of Engineering, Cloud Platform</div>
+        <div class="timeline-company">Guidewire Software</div>
+        <div class="timeline-desc">Built the Cloud Platform organization from scratch — unified ownership across Product Management, Engineering, and SRE. The platform is now the strategic foundation of Guidewire's cloud business, directly driving subscription revenue growth. Pioneered Platform-as-a-Product model, founded the company's open source program, and championed engineering excellence through observability and DevOps culture.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Aug 2018 — Nov 2020</div>
+        <div class="timeline-role">Senior Director of Engineering</div>
+        <div class="timeline-company">Guidewire Software</div>
+        <div class="timeline-desc">Laid the engineering foundations for the Cloud Platform — established team structures, technical standards, and delivery processes. Drove architectural decisions enabling horizontal scalability and cloud-readiness for core platform services.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jan 2016 — Aug 2018</div>
+        <div class="timeline-role">Principal Software Engineer, Cloud Foundry R&amp;D</div>
+        <div class="timeline-company">Pivotal Software</div>
+        <div class="timeline-desc">Core contributor to the CloudFoundry open-source PaaS. Delivered performance enhancements for Diego, CF's container orchestration engine. Built security tooling for vulnerability triage and CI/CD secret extraction with HashiCorp Vault and CredHub integrations.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jun 2011 — Jan 2016</div>
+        <div class="timeline-role">Director, Server Development &amp; Architect</div>
+        <div class="timeline-company">Monitise Americas</div>
+        <div class="timeline-desc">Designed and delivered an event-driven microservices re-architecture of a large monolith, achieving &gt;200% performance improvement. Built an intelligent messaging product using complex event processing. Led full people-management lifecycle.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2004 — 2011</div>
+        <div class="timeline-role">Software Architect &middot; Senior Developer &middot; Tech Lead</div>
+        <div class="timeline-company">UST Global (Blackhawk Network) &middot; Lehman Brothers &middot; Device Driven</div>
+        <div class="timeline-desc">Built card-processing and financial settlement platforms. Provided architectural guidance on enterprise integration at Lehman Brothers' Global BPM Center of Excellence. Architected peer-to-peer cloud engine on AWS. Introduced TDD and Agile practices.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Open Source -->
+<section class="oss-section" id="opensource">
+  <div class="container">
+    <div class="section-label reveal">Open Source</div>
+    <h2 class="section-title reveal reveal-delay-1">Building in the open</h2>
+    <p class="section-desc reveal reveal-delay-2">From founding Guidewire's OSS program to maintaining CNCF projects — open source is how I give back to the community that shaped my career.</p>
+    <div class="oss-grid">
+      <a href="https://github.com/guidewire-oss/fern-platform" class="oss-card reveal" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">fern-platform</span>
+          <span class="oss-card-badge" style="border-color:var(--accent-dim);color:var(--accent)">AI / LLM</span>
+        </div>
+        <div class="oss-card-desc">AI-powered test intelligence platform with LLM integration for automated failure analysis, pattern recognition, and intelligent test insights. Unified multi-format ingestion for comprehensive test analytics.</div>
+        <div class="oss-card-meta">
+          <span><svg viewBox="0 0 24 24" fill="currentColor" class="star-color"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 445+</span>
+          <span>Go &middot; AI/LLM</span>
+        </div>
+      </a>
+      <a href="https://github.com/guidewire-oss/fern-reporter" class="oss-card reveal reveal-delay-1" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">fern-reporter</span>
+          <span class="oss-card-badge">Founder</span>
+        </div>
+        <div class="oss-card-desc">A Ginkgo test reporter extension for storing test run information and generating rich HTML reports.</div>
+        <div class="oss-card-meta">
+          <span><svg viewBox="0 0 24 24" fill="currentColor" class="star-color"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 270+</span>
+          <span>Go</span>
+        </div>
+      </a>
+      <a href="https://github.com/guidewire-oss/sawchain" class="oss-card reveal reveal-delay-2" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">sawchain</span>
+          <span class="oss-card-badge">Founder</span>
+        </div>
+        <div class="oss-card-desc">Kubernetes YAML-driven testing framework. Simplify and automate K8s resource validation with declarative test specs.</div>
+        <div class="oss-card-meta">
+          <span>Kubernetes</span>
+        </div>
+      </a>
+      <a href="https://github.com/kubevela/kubevela" class="oss-card reveal" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">KubeVela</span>
+          <span class="oss-card-badge">Maintainer</span>
+        </div>
+        <div class="oss-card-desc">The Modern Application Platform. CNCF project for application-centric Kubernetes delivery with OAM specification.</div>
+        <div class="oss-card-meta">
+          <span><svg viewBox="0 0 24 24" fill="currentColor" class="star-color"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 6.3k+</span>
+          <span>Go &middot; CNCF</span>
+        </div>
+      </a>
+      <a href="https://github.com/anoop2811/ai-craft" class="oss-card reveal reveal-delay-1" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">ai-craft</span>
+          <span class="oss-card-badge" style="border-color:var(--accent-dim);color:var(--accent)">AI / LLM</span>
+        </div>
+        <div class="oss-card-desc">Explorations in AI engineering — experiments with LLM applications, agent orchestration patterns, and AI-powered developer tooling.</div>
+        <div class="oss-card-meta">
+          <span>AI &middot; Agents</span>
+        </div>
+      </a>
+      <a href="https://github.com/guacsec/guac" class="oss-card reveal reveal-delay-2" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">GUAC</span>
+          <span class="oss-card-badge">Contributor</span>
+        </div>
+        <div class="oss-card-desc">Graph for Understanding Artifact Composition. Software supply-chain security graph for dependency analysis and vulnerability tracking.</div>
+        <div class="oss-card-meta">
+          <span>Supply Chain Security</span>
+        </div>
+      </a>
+      <a href="https://github.com/cloudfoundry/diego-release" class="oss-card reveal reveal-delay-2" target="_blank" rel="noopener">
+        <div class="oss-card-header">
+          <span class="oss-card-name">CloudFoundry Diego</span>
+          <span class="oss-card-badge">Committer</span>
+        </div>
+        <div class="oss-card-desc">Container orchestration engine for Cloud Foundry. Core contributor to scheduling, health management, and security tooling.</div>
+        <div class="oss-card-meta">
+          <span>Go</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- AI & Innovation -->
+<section class="about" id="ai">
+  <div class="container">
+    <div class="section-label reveal">AI &amp; Innovation</div>
+    <h2 class="section-title reveal reveal-delay-1">AI meets platform engineering</h2>
+    <p class="section-desc reveal reveal-delay-2">Bringing AI and LLMs into the platform engineering workflow — from intelligent test analysis to autonomous SRE operations.</p>
+    <div class="about-highlights reveal reveal-delay-3" style="grid-template-columns:repeat(3,1fr)">
+      <div class="highlight-card">
+        <div class="highlight-num" style="font-size:1.4rem">LLM-Powered Testing</div>
+        <div class="highlight-text">Built fern-platform with LLM integration for automated failure analysis, test pattern recognition, and intelligent insights across large test suites</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-num" style="font-size:1.4rem">Agent Orchestration</div>
+        <div class="highlight-text">Exploring AI agent patterns for SRE automation — incident triage, root cause analysis, and self-healing infrastructure at enterprise scale</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-num" style="font-size:1.4rem">AI Developer Tooling</div>
+        <div class="highlight-text">Building tools that augment engineering productivity through AI — from code analysis and review automation to intelligent CI/CD pipelines</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section id="tech">
+  <div class="container">
+    <div class="section-label reveal">Expertise</div>
+    <h2 class="section-title reveal reveal-delay-1">Technology landscape</h2>
+    <p class="section-desc reveal reveal-delay-2">Polyglot practitioner with deep expertise across the cloud-native stack.</p>
+    <div class="tech-grid">
+      <div class="tech-category reveal">
+        <div class="tech-cat-name">Cloud &amp; Platform</div>
+        <div class="tech-tags">
+          <span class="tech-tag">Kubernetes</span>
+          <span class="tech-tag">KubeVela</span>
+          <span class="tech-tag">Crossplane</span>
+          <span class="tech-tag">CloudFoundry</span>
+          <span class="tech-tag">AWS</span>
+          <span class="tech-tag">CNCF</span>
+          <span class="tech-tag">OCM</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-1">
+        <div class="tech-cat-name">Architecture</div>
+        <div class="tech-tags">
+          <span class="tech-tag">Microservices</span>
+          <span class="tech-tag">Event-Driven</span>
+          <span class="tech-tag">Distributed Systems</span>
+          <span class="tech-tag">GraphQL</span>
+          <span class="tech-tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-2">
+        <div class="tech-cat-name">DevOps &amp; Security</div>
+        <div class="tech-tags">
+          <span class="tech-tag">CI/CD</span>
+          <span class="tech-tag">HashiCorp Vault</span>
+          <span class="tech-tag">Observability</span>
+          <span class="tech-tag">Supply Chain Security</span>
+          <span class="tech-tag">GUAC</span>
+        </div>
+      </div>
+      <div class="tech-category reveal">
+        <div class="tech-cat-name">Languages</div>
+        <div class="tech-tags">
+          <span class="tech-tag">Go</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Spring</span>
+          <span class="tech-tag">GraphQL</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-1">
+        <div class="tech-cat-name">AI &amp; Emerging</div>
+        <div class="tech-tags">
+          <span class="tech-tag">LLM Integration</span>
+          <span class="tech-tag">AI Developer Tooling</span>
+          <span class="tech-tag">Agent Orchestration</span>
+          <span class="tech-tag">RAG Pipelines</span>
+          <span class="tech-tag">Prompt Engineering</span>
+          <span class="tech-tag">AI-Powered SRE</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-2">
+        <div class="tech-cat-name">Data &amp; Infrastructure</div>
+        <div class="tech-tags">
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">Elasticsearch</span>
+          <span class="tech-tag">Grafana</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Writing -->
+<section id="writing">
+  <div class="container">
+    <div class="section-label reveal">Writing</div>
+    <h2 class="section-title reveal reveal-delay-1">From the engineering blog</h2>
+    <p class="section-desc reveal reveal-delay-2">Technical writing on cloud architecture, platform engineering, and building engineering culture — published on the Guidewire Engineering Blog.</p>
+    <div class="writing-grid">
+      <a href="https://medium.com/guidewire-engineering-blog/the-journey-of-the-fern-project-58cdce877734" class="writing-card reveal" target="_blank" rel="noopener">
+        <div class="writing-card-date">Feb 2025</div>
+        <div class="writing-card-title">The Journey of the Fern Project</div>
+        <div class="writing-card-desc">From frustration to innovation — how we built the Fern Project to revolutionize test reporting and product visibility with open-source tooling.</div>
+        <div class="writing-card-pub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Guidewire Engineering Blog</div>
+      </a>
+      <a href="https://medium.com/guidewire-engineering-blog/a-day-in-the-life-of-a-cloud-common-services-engineer-c67cf3debc57" class="writing-card reveal reveal-delay-1" target="_blank" rel="noopener">
+        <div class="writing-card-date">Dec 2024</div>
+        <div class="writing-card-title">A Day in the Life of a Cloud Common Services Engineer</div>
+        <div class="writing-card-desc">How we formalized pair programming and Test Driven Development within Cloud Common Services to accelerate learning and delivery.</div>
+        <div class="writing-card-pub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Guidewire Engineering Blog</div>
+      </a>
+      <a href="https://medium.com/guidewire-engineering-blog/guidewire-cloud-why-hybrid-tenancy-is-the-right-choice-56a0ff176032" class="writing-card reveal reveal-delay-2" target="_blank" rel="noopener">
+        <div class="writing-card-date">Guidewire Cloud Series</div>
+        <div class="writing-card-title">Why Hybrid-Tenancy is the Right Choice (Part 1 &amp; 2)</div>
+        <div class="writing-card-desc">A deep dive into why hybrid tenancy makes sense for P&amp;C insurers — covering data isolation, shared services, and the architecture behind Guidewire Cloud.</div>
+        <div class="writing-card-pub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Guidewire Engineering Blog</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Speaking & Community -->
+<section class="speaking-section" id="speaking">
+  <div class="container">
+    <div class="section-label reveal">Community</div>
+    <h2 class="section-title reveal reveal-delay-1">Speaking &amp; presence</h2>
+    <p class="section-desc reveal reveal-delay-2">Sharing knowledge at conferences, on podcasts, and across the open-source community.</p>
+    <div class="speaking-list">
+      <div class="speaking-item reveal">
+        <div class="speaking-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div>
+          <div class="speaking-title">KubeCon North America 2025</div>
+          <div class="speaking-meta">Speaker — Platform Engineering &amp; Kubernetes Ecosystems</div>
+        </div>
+        <span class="speaking-tag">Conference</span>
+      </div>
+      <div class="speaking-item reveal reveal-delay-1">
+        <div class="speaking-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <div>
+          <div class="speaking-title">Industry Podcast Guest</div>
+          <div class="speaking-meta">Featured on multiple podcasts covering platform engineering, developer experience, and Kubernetes</div>
+        </div>
+        <span class="speaking-tag">Podcast</span>
+      </div>
+      <div class="speaking-item reveal reveal-delay-2">
+        <div class="speaking-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="speaking-title">KubeVela Maintainer — CNCF</div>
+          <div class="speaking-meta">Active maintainer: design, code review, and community growth for the application-centric K8s platform</div>
+        </div>
+        <span class="speaking-tag">Open Source</span>
+      </div>
+      <div class="speaking-item reveal">
+        <div class="speaking-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <div class="speaking-title">CloudFoundry Committer</div>
+          <div class="speaking-meta">Committer and reviewer across Diego, security tooling, and multiple CF sub-projects</div>
+        </div>
+        <span class="speaking-tag">Open Source</span>
+      </div>
+      <div class="speaking-item reveal reveal-delay-1">
+        <div class="speaking-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div>
+          <div class="speaking-title">Technical Blogger</div>
+          <div class="speaking-meta">Writing about platform engineering, cloud-native architecture, and engineering leadership</div>
+        </div>
+        <span class="speaking-tag">Writing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-label reveal">Connect</div>
+    <h2 class="section-title reveal reveal-delay-1">Let's talk</h2>
+    <p class="section-desc reveal reveal-delay-2">Whether it's about platform engineering, open source, or engineering leadership — I'm always happy to connect.</p>
+    <div class="contact-links reveal reveal-delay-3">
+      <a href="mailto:anoop2811@hotmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+      <a href="https://github.com/anoop2811" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/anoopgopalakrishnan" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://twitter.com/anoop2811" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+        Twitter
+      </a>
+      <a href="https://medium.com/@anoop2811" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Medium
+      </a>
+      <a href="https://insight-techologue.blogspot.com" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        Blog
+      </a>
+      <a href="https://stackoverflow.com/users/2149007" class="contact-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Stack Overflow
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Anoop Gopalakrishnan. San Francisco Bay Area.</p>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// Mobile nav
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navToggle').classList.toggle('active');
+}
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navToggle').classList.remove('active');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Counter animation for hero stats
+function animateCounters() {
+  document.querySelectorAll('.stat-num').forEach(el => {
+    const text = el.textContent;
+    const match = text.match(/(\d+)/);
+    if (!match) return;
+    const target = parseInt(match[0]);
+    const suffix = text.replace(match[0], '').trim();
+    const prefix = text.indexOf(match[0]) > 0 ? text.substring(0, text.indexOf(match[0])) : '';
+    let current = 0;
+    const increment = target / 40;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        el.textContent = text;
+        clearInterval(timer);
+      } else {
+        el.textContent = prefix + Math.floor(current) + suffix;
+      }
+    }, 30);
+  });
+}
+
+// Trigger counter animation when hero stats become visible
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounters();
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statsObserver.observe(heroStats);
+</script>
+</body>
+</html>
