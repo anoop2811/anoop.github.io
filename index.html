@@ -7,25 +7,25 @@
 <meta name="description" content="Technology executive with 20+ years building cloud platforms, AI-powered developer tooling, and leading engineering organizations. CNCF contributor, KubeCon speaker, and open-source leader.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=Albert+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0c10;
-  --bg-elevated:#12151c;
-  --bg-card:#161922;
-  --surface:#1c2030;
-  --border:#252a3a;
-  --text:#e4e7ef;
-  --text-secondary:#8b92a8;
-  --text-muted:#565e78;
-  --accent:#2dd4a8;
-  --accent-dim:#1a9e7a;
-  --accent-glow:rgba(45,212,168,0.12);
-  --accent-warm:#34d4b0;
-  --serif:'DM Serif Display',Georgia,serif;
-  --sans:'Outfit',system-ui,sans-serif;
-  --mono:'JetBrains Mono',monospace;
+  --bg:#0e0d12;
+  --bg-elevated:#141319;
+  --bg-card:#19181f;
+  --surface:#1f1e28;
+  --border:#2c2a38;
+  --text:#e8e5f0;
+  --text-secondary:#9590a8;
+  --text-muted:#605b73;
+  --accent:#cf7d5a;
+  --accent-dim:#a5623f;
+  --accent-glow:rgba(207,125,90,0.12);
+  --accent-warm:#d88b68;
+  --serif:'Crimson Pro',Georgia,serif;
+  --sans:'Albert Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
   --ease:cubic-bezier(0.25,0.46,0.45,0.94);
   --ease-out:cubic-bezier(0.16,1,0.3,1);
 }
@@ -53,7 +53,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:1.25rem 2.5rem;
   display:flex;justify-content:space-between;align-items:center;
-  background:rgba(10,12,16,0.8);backdrop-filter:blur(20px);
+  background:rgba(14,13,18,0.8);backdrop-filter:blur(20px);
   border-bottom:1px solid transparent;
   transition:border-color 0.4s var(--ease)
 }
@@ -87,7 +87,7 @@ section{padding:7rem 2.5rem}
 }
 .hero-bg{
   position:absolute;top:-20%;right:-10%;width:700px;height:700px;
-  background:radial-gradient(circle,rgba(45,212,168,0.06) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(207,125,90,0.06) 0%,transparent 70%);
   pointer-events:none;animation:heroPulse 8s ease-in-out infinite alternate
 }
 @keyframes heroPulse{0%{opacity:0.6;transform:scale(1)}100%{opacity:1;transform:scale(1.15)}}
@@ -100,11 +100,11 @@ section{padding:7rem 2.5rem}
 }
 .hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
 .hero-name{
-  font-family:var(--serif);font-size:clamp(3rem,7vw,5.5rem);
-  line-height:1.05;font-weight:400;margin-bottom:1rem;
+  font-family:var(--serif);font-size:clamp(3.2rem,7.5vw,5.8rem);
+  line-height:1.05;font-weight:600;margin-bottom:1rem;
   opacity:0;transform:translateY(30px);animation:fadeUp 0.8s var(--ease-out) 0.35s forwards
 }
-.hero-name em{font-style:italic;color:var(--accent)}
+.hero-name em{font-style:italic;color:var(--accent-warm)}
 .hero-title{
   font-size:clamp(1rem,2vw,1.35rem);font-weight:300;color:var(--text-secondary);
   margin-bottom:1rem;max-width:600px;
@@ -142,7 +142,7 @@ section{padding:7rem 2.5rem}
 }
 .section-label::before{content:'';width:20px;height:1px;background:var(--accent)}
 .section-title{
-  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:1rem
+  font-family:var(--serif);font-size:clamp(2.1rem,4.2vw,3.1rem);line-height:1.15;margin-bottom:1rem;font-weight:500
 }
 .section-desc{
   font-size:1rem;color:var(--text-secondary);max-width:600px;line-height:1.75;margin-bottom:3.5rem;font-weight:300
@@ -316,7 +316,7 @@ footer{
   nav{padding:1rem 1.5rem}
   .nav-links{
     display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-    background:rgba(10,12,16,0.97);backdrop-filter:blur(20px);
+    background:rgba(14,13,18,0.97);backdrop-filter:blur(20px);
     flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
     z-index:99
   }
